@@ -1,0 +1,43 @@
+Nume: POSTOLACHE Alexandru-Gabriel Grupa: 331CB
+
+					TEMA 1 ASC
+
+	ORGANIZARE
+	Pt stocarea in Marketplace a produselor folosesc un dictionar.
+Cheia este id-ul producatorului iar valoarea e o lista de produse.
+	Pt reprezentarea carturilor in Marketplace folosesc un alt dictionar.
+Cheia este id-ul cartului iar valoarea este o grupare de 2 elemente:
+id-ul producatorului si produsul respectiv.
+	Marketplace-ul mai are 3 lock-uri folosite la sincronizarea thread-urilor
+si 2 valori care incep de la -1(id_prod si id_cart) ce reprezinta id-ul
+ultimului prod/cart inregistrat.
+
+	IMPLEMENTARE
+	Am implementat TOT. Am trimis tema cu in jur de 1h dupa 8 aprilie 2021, ora 23:55.
+
+	PRODUCER
+	Acesta ia fiecare produs din lista, si publica cantitatea de produs
+data. Inainte de publicare asteapta un timp si atunci cand nu mai poate
+publica mai asteapta inca un timp dupa marketplace.
+
+	CONSUMER
+	Pt fiecare cart, il inregistreaza si fie adauga produse in cart fie
+elimina produse din cart. La final primeste o lista cu toate produsele
+ramase in cart. Cand nu poate adauga in cart asteapta dupa marketplace.
+
+	MARKETPLACE
+	Inregistreaza produsele si carturile incrementand mereu 2 valori.
+	Se publica produse, se scoate din carturi si se adauga in ele
+modificand cele 2 dictionare.
+	2 Lock-uri se folosesc at cand se incrementeaza id_cart si id_prod
+de mai multe thread-uri, iar celalalt cand se modifica dictionarele
+
+	UNIT TESTING
+	Am implementat 6 unit-teste cu situatii simple pentru verificarea metodelor
+din Marketplace. In setUp() am creat marketplace-ul si cateva produse folosite.
+
+	LOGGING
+	In constructor-ul Marketplace-ului am definit logger-ul care scrie pe
+nivelul info. Foloseste un RotatingFileHandler cu o dimensiune max de 2000
+si max 10 fisiere de backup. Folosesc si un formatter care converteste
+formatul timpului afisat la gmtime.
